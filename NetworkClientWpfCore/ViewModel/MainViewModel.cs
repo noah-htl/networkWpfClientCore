@@ -18,12 +18,9 @@ namespace NetworkClientWpfCore.ViewModel
 
         public RelayCommand UdpClientViewCommand { get; set; }
         public RelayCommand UdpServerViewCommand { get; set; }
-        public RelayCommand TcpClientViewCommand { get; set; }
-        public RelayCommand TcpServerViewCommand { get; set; }
 
         public RelayCommand CloseAppCommand { get; set; }
  
-        public RelayCommand HttpServerViewCommand { get; set; }
 
         private object _currentView;
 
