@@ -15,11 +15,52 @@
                 </LinearGradientBrush>
             </Border.Background>
         </Border>
-        <TextBlock Text="UDP Server"
+        <StackPanel>
+            <TextBlock Text="UDP Server"
                    Foreground="White"
                    Margin="10 10 0 0"
                    FontSize="22">
 
-        </TextBlock>
+            </TextBlock>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock FontSize="22" Text="Portnummer:" VerticalAlignment="Center"/>
+
+                <StackPanel Grid.Row="2" Grid.Column="2"  Orientation="Horizontal">
+                    <TextBox Margin="5" HorizontalAlignment="Left" Text="{Binding BindPort, UpdateSourceTrigger=PropertyChanged}"/>
+                    <Button Content="Listen" Margin="5" Command="{Binding BindCommand}"/>
+                </StackPanel>
+
+            </Grid>
+
+            <ListView ItemsSource="{Binding ReceivedMessages}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Peer">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding Peer}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header="Message">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding Message}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
     </Grid>
 </UserControl>

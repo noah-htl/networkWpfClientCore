@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace NetworkClientWpfCore
 {
@@ -9,6 +10,11 @@ namespace NetworkClientWpfCore
     /// </summary>
     public partial class App : Application
     {
-    }
+        public static Dispatcher Dispatcher { get; private set; }
 
+        public App()
+        {
+            Dispatcher = Dispatcher.CurrentDispatcher;
+        }
+    }
 }
