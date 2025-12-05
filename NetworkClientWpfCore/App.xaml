@@ -21,6 +21,15 @@
             <DataTemplate DataType="{x:Type viewModel:UdpServerViewModel}">
                 <view:UdpServerView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:TcpServerViewModel}">
+                <view:TcpServerView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:TcpClientViewModel}">
+                <view:TcpClientView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:HttpServerViewModel}">
+                <view:HttpServerView/>
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

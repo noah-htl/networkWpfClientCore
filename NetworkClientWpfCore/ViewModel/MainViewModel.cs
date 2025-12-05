@@ -13,11 +13,17 @@ namespace NetworkClientWpfCore.ViewModel
 
         public UdpClientViewModel UdpClientVM { get; private set; }
         public UdpServerViewModel UdpServerVM { get; private set; }
+        public TcpClientViewModel TcpClientVM { get; private set; }
+        public TcpServerViewModel TcpServerVM { get; private set; }
+        public HttpServerViewModel HttpServerVM { get; private set; }
 
         public RelayCommand HomeViewCommand { get; set; }
 
         public RelayCommand UdpClientViewCommand { get; set; }
         public RelayCommand UdpServerViewCommand { get; set; }
+        public RelayCommand TcpClientViewCommand { get; set; }
+        public RelayCommand TcpServerViewCommand { get; set; }
+        public RelayCommand HttpServerViewCommand { get; set; }
 
         public RelayCommand CloseAppCommand { get; set; }
  
@@ -38,6 +44,9 @@ namespace NetworkClientWpfCore.ViewModel
             HomeVM = new HomeViewModel();
             UdpClientVM = new UdpClientViewModel();
             UdpServerVM = new UdpServerViewModel();
+            TcpClientVM = new TcpClientViewModel();
+            TcpServerVM = new TcpServerViewModel();
+            HttpServerVM = new HttpServerViewModel();
 
             CurrentView = HomeVM;
 
@@ -54,6 +63,21 @@ namespace NetworkClientWpfCore.ViewModel
             UdpServerViewCommand = new RelayCommand(o =>
             {
                 CurrentView = UdpServerVM;
+            });
+
+            TcpClientViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = TcpClientVM;
+            });
+
+            TcpServerViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = TcpServerVM;
+            });
+
+            HttpServerViewCommand = new RelayCommand(o =>
+            {
+                CurrentView = HttpServerVM;
             });
 
 

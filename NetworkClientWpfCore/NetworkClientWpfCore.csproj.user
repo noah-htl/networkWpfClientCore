@@ -5,6 +5,15 @@
     <Compile Update="View\HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\HttpServerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TcpClientView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\TcpServerView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UdpClientView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
