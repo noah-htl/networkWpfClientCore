@@ -31,11 +31,12 @@
                     <ColumnDefinition Width="300" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock FontSize="22" Text="Portnummer:" VerticalAlignment="Center"/>
+                <TextBlock FontSize="22" Text="IP:Port" VerticalAlignment="Center"/>
 
                 <StackPanel Grid.Row="2" Grid.Column="2"  Orientation="Horizontal">
-                    <TextBox Margin="5" HorizontalAlignment="Left" Text="{Binding BindPort, UpdateSourceTrigger=PropertyChanged}" MinWidth="50"/>
+                    <TextBox Margin="5" HorizontalAlignment="Left" Text="{Binding Bind, UpdateSourceTrigger=PropertyChanged}" MinWidth="50"/>
                     <Button Content="Listen" Margin="5" Command="{Binding BindCommand}"/>
+                    <TextBlock Text="{Binding State}" VerticalAlignment="Center"></TextBlock>
                 </StackPanel>
 
             </Grid>

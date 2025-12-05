@@ -18,17 +18,30 @@ namespace NetworkClientWpfCore.ViewModel
     {
         private readonly ObservableCollection<ReceivedMessageModel> _receivedMessages;
         private int _bindPort;
+        private IPAddress _bindIp;
+        private string _rawBind = "";
+        private string _state = "Stopped";
 
         private UdpClient? _udpClient;
 
         public IEnumerable<ReceivedMessageModel> ReceivedMessages => _receivedMessages;
-        public int BindPort
+        public string Bind
         {
-            get => _bindPort;
+            get => _rawBind;
             set
             {
-                _bindPort = value;
-                OnPropertyChanged(nameof(BindPort));
+                _rawBind = value;
+                OnPropertyChanged(nameof(Bind));
+            }
+        }
+
+        public string State
+        {
+            get => _state;
+            set
+            {
+                _state = value;
+                OnPropertyChanged(nameof(State));
             }
         }
 
@@ -45,14 +58,40 @@ namespace NetworkClientWpfCore.ViewModel
                         if (_udpClient != null)
                         {
                             _udpClient.Dispose();
+                            State = "Stopped";
                         }
 
-                        _udpClient = new UdpClient(BindPort);
+                        _udpClient = new UdpClient();
+                        _udpClient.Client.Bind(new IPEndPoint(_bindIp, _bindPort));
+                        State = $"Listening: {_bindIp}:{_bindPort}";
                         _udpClient.BeginReceive(OnReceive, null);
                     },
                 o =>
                     {
-                        return BindPort > 0 && BindPort < 65535;
+                        string[] parts = Bind.Split(":");
+                        IPAddress? ip;
+                        int port;
+                        if (parts.Length != 2)
+                        {
+                            return false;
+                        }
+                        if (!IPAddress.TryParse(parts[0], out ip))
+                        {
+                            return false;
+                        }
+                        if (!int.TryParse(parts[1], out port))
+                        {
+                            return false;
+                        }
+                        if(port < 1025)
+                        {
+                            return false;
+                        }
+
+                        _bindIp = ip;
+                        _bindPort = port;
+
+                        return true;
                     }
             );
         }
