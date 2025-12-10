@@ -98,21 +98,24 @@ namespace NetworkClientWpfCore.ViewModel
 
         private void OnReceive(IAsyncResult o)
         {
-            if(_udpClient == null) return; // should never happen
-
-            IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
-            byte[] receivedBytes = _udpClient.EndReceive(o, ref ep);
-            string receivedText = Encoding.ASCII.GetString(receivedBytes);
-
-            string peer = $"{ep.Address}:{ep.Port}";
-
-            App.Dispatcher.Invoke(() =>
+            try
             {
-                _receivedMessages.Add(new ReceivedMessageModel(peer, receivedText));
-                OnPropertyChanged(nameof(ReceivedMessages));
-            });
+                if (_udpClient == null) return; // should never happen
 
-            _udpClient.BeginReceive(OnReceive, null);
+                IPEndPoint ep = new IPEndPoint(IPAddress.Any, 0);
+                byte[] receivedBytes = _udpClient.EndReceive(o, ref ep);
+                string receivedText = Encoding.ASCII.GetString(receivedBytes);
+
+                string peer = $"{ep.Address}:{ep.Port}";
+
+                App.Dispatcher.Invoke(() =>
+                {
+                    _receivedMessages.Add(new ReceivedMessageModel(peer, receivedText));
+                    OnPropertyChanged(nameof(ReceivedMessages));
+                });
+
+                _udpClient.BeginReceive(OnReceive, null);
+            } catch (Exception) { }
         }
     }
 }
