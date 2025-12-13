@@ -33,13 +33,18 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock FontSize="22" Text="IP-Adress/Portnummer:" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="2" Margin="5" Text="{Binding ReceiverAddress}"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <TextBox Margin="5" Text="{Binding ReceiverAddress, UpdateSourceTrigger=PropertyChanged}" MinWidth="100"/>
+                    <Button Margin="5" Content="Connect" Command="{Binding ConnectCommand}"></Button>
+                </StackPanel>
+               
 
                 <TextBlock Grid.Row="2" FontSize="22" Text="Message:" VerticalAlignment="Center"/>
 
                 <StackPanel Grid.Row="2" Grid.Column="2"  Orientation="Horizontal">
-                    <TextBox Margin="5" Width="200" HorizontalAlignment="Left" Text="{Binding Message}"/>
+                    <TextBox Margin="5" Width="200" HorizontalAlignment="Left" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}"/>
                     <Button Content="Send Message" Margin="5" Command="{Binding SendMessageCommand}"/>
+                    <StackPanel Width="100"/>
                 </StackPanel>
 
             </Grid>

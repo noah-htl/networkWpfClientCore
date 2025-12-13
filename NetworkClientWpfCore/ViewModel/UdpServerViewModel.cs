@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Threading;
 using NetworkClientWpfCore.Model;
-using NetworkClientWpfCore.Network;
 
 namespace NetworkClientWpfCore.ViewModel
 {
@@ -83,7 +82,7 @@ namespace NetworkClientWpfCore.ViewModel
                         {
                             return false;
                         }
-                        if(port < 1025)
+                        if(port < 1)
                         {
                             return false;
                         }

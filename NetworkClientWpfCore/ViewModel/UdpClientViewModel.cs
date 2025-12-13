@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
+using System.Net;
 
 namespace NetworkClientWpfCore.ViewModel
 {
@@ -49,6 +50,30 @@ namespace NetworkClientWpfCore.ViewModel
                 var udp = new UdpClient();
                 var data = Encoding.ASCII.GetBytes(msg + '\r');
                 udp.Send(data, data.Length, ip, port);
+            },
+            (o) =>
+            {
+                string[] parts = ReceiverAddress.Split(":");
+                IPAddress? ip;
+                int port;
+                if (parts.Length != 2)
+                {
+                    return false;
+                }
+                if (!IPAddress.TryParse(parts[0], out ip))
+                {
+                    return false;
+                }
+                if (!int.TryParse(parts[1], out port))
+                {
+                    return false;
+                }
+                if (port < 1)
+                {
+                    return false;
+                }
+
+                return true;
             });
         }
     }
